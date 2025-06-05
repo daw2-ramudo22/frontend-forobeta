@@ -24,14 +24,14 @@ window.enviarMensaje = async function () {
 
     if (!res.ok) {
       const err = await res.json();
-      throw new Error(err.error || 'Debe de crear una cuenta o iniciar sesion para enviar mensajes.');
+      throw new Error(err.error || 'Error al enviar mensaje');
     }
 
     document.getElementById('mensaje-input').value = '';
     await cargarMensajes(hiloId);
   } catch (error) {
     console.error("Error al enviar:", error);
-    alert("No se pudo enviar el mensaje.");
+    alert("Debe de crear una cuenta o iniciar sesion para enviar mensajes.");
   }
 };
 

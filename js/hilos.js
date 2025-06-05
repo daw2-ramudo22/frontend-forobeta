@@ -54,7 +54,7 @@ function mostrarHilos(hilos) {
       <div class="hilo-item">
         <div class="hilo-titulo" onclick="abrirHilo('${hilo._id}')">${hilo.titulo}</div>
         <div class="hilo-info">
-          Por: ${autorNombre} | Creado: ${formatearFecha(hilo.fecha_publicacion)} | Mensajes: ${hilo.numMensajes || 0}
+          Por: ${autorNombre} | Creado: ${formatearFecha(hilo.fecha_publicacion)} | Mensajes: ${hilo.cantidadMensajes || 0}
           ${botones}
         </div>
       </div>

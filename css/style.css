@@ -537,7 +537,6 @@ body {
   text-align: left;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-  animation: slideIn 0.5s ease;
 }
 
 .mensaje p {

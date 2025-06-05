@@ -2,17 +2,19 @@ import { API_URL } from './config.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('login-form');
+  const emailInput = document.getElementById('email');
+  const passwordInput = document.getElementById('password');
 
-  if (!form) {
-    console.error("Formulario de login no encontrado");
+  if (!form || !emailInput || !passwordInput) {
+    console.error("Elementos del formulario no encontrados");
     return;
   }
 
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+    const email = emailInput.value;
+    const password = passwordInput.value;
 
     try {
       const res = await fetch(`${API_URL}/usuarios/login`, {

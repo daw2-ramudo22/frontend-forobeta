@@ -1,6 +1,5 @@
 //Este archivo js es el princpial de todos y es el que muestra toda la info recogida en otros componentes
 import { auth } from './auth.js';
-import { cargarPreferenciaTema, setupThemeToggle } from './theme.js';
 import { cargarHilos } from './hilos.js';
 
 

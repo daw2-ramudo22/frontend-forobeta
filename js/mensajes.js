@@ -1,6 +1,6 @@
 const API_URL = 'https://backend-forobeta.onrender.com';
 
-// Función global para enviar un mensaje (llamada desde el HTML onclick)
+// Función global para enviar un mensaje
 window.enviarMensaje = async function () {
   const token = localStorage.getItem('token');
   const texto = document.getElementById('mensaje-input').value;
@@ -24,7 +24,7 @@ window.enviarMensaje = async function () {
 
     if (!res.ok) {
       const err = await res.json();
-      throw new Error(err.error || 'Error al enviar mensaje');
+      throw new Error(err.error || 'Debe de crear una cuenta o iniciar sesion para enviar mensajes.');
     }
 
     document.getElementById('mensaje-input').value = '';

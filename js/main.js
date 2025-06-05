@@ -5,8 +5,6 @@ import { cargarHilos } from './hilos.js';
 
 // Esto es lo que estaba en el document.addEventListener('DOMContentLoaded')
 document.addEventListener('DOMContentLoaded', function() {
-  setupThemeToggle(); // Configura el listener del botón de tema
-
   // Verificar sesión y mostrar saludo
   auth.verificarSesion();
 

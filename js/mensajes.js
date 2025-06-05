@@ -39,28 +39,31 @@ window.enviarMensaje = async function () {
 async function cargarMensajes(hiloId) {
   try {
     const contenedor = document.getElementById('mensajes');
-    contenedor.innerHTML = '';
+    contenedor.innerHTML = ''; // Limpia antes de cargar
 
-    // Obtener los datos del hilo (incluye título y mensaje inicial)
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
+
+    // Obtener el hilo (incluye mensaje inicial)
     const hiloRes = await fetch(`${API_URL}/hilos/${hiloId}`);
     const hilo = await hiloRes.json();
 
     // Mostrar el mensaje inicial del hilo
-    const mensajeInicial = document.createElement('div');
-    mensajeInicial.classList.add('mensaje');
-    mensajeInicial.innerHTML = `
-      <p><strong>${hilo.owner?.nombre || 'Anónimo'}:</strong> ${hilo.mensaje_del_hilo}</p>
-      <small>Publicado el: ${new Date(hilo.fecha_publicacion).toLocaleString('es-ES')}</small>
-    `;
-    contenedor.appendChild(mensajeInicial);
+    if (hilo?.mensaje_del_hilo) {
+      const mensajeInicial = document.createElement('div');
+      mensajeInicial.classList.add('mensaje');
+      mensajeInicial.innerHTML = `
+        <p><strong>${hilo.owner?.nombre || 'Anónimo'}:</strong> ${hilo.mensaje_del_hilo}</p>
+        <small>Publicado el: ${new Date(hilo.fecha_publicacion).toLocaleString('es-ES')}</small>
+      `;
+      contenedor.appendChild(mensajeInicial);
+    }
 
-    // Ahora carga los demás mensajes del hilo
+    // Cargar mensajes adicionales (respuestas)
     const res = await fetch(`${API_URL}/mensajes/hilo/${hiloId}`);
     const mensajes = await res.json();
 
-    const usuario = JSON.parse(localStorage.getItem('usuario'));
-
-    if (mensajes.length === 0) {
+    // Solo mostrar mensaje de "sin respuestas" si NO hay respuestas (sin incluir mensaje del hilo)
+    if (!mensajes.length) {
       const sinRespuestas = document.createElement('div');
       sinRespuestas.className = 'no-hilos';
       sinRespuestas.textContent = 'Este hilo no tiene respuestas aún.';
@@ -70,6 +73,7 @@ async function cargarMensajes(hiloId) {
 
     mensajes.forEach(mensaje => {
       const esPropio = mensaje.autor?._id === usuario?.id;
+
       const div = document.createElement('div');
       div.classList.add('mensaje');
       div.innerHTML = `
@@ -87,6 +91,7 @@ async function cargarMensajes(hiloId) {
     document.getElementById('mensajes').innerHTML = '<div class="error">No se pudieron cargar los mensajes.</div>';
   }
 }
+
 
 
 // Función para editar mensaje

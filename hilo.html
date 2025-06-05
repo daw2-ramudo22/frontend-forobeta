@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hilo del Foro</title>
+  <link rel="stylesheet" href="./css/mensajes.css">
+</head>
+<body>
+
+  <!-- Saludo de usuario -->
+  <div id="saludo-usuario"></div>
+
+  <!-- Contenedor principal -->
+  <main class="hilos-container">
+    <h2 class="hilos-titulo-foro" id="titulo-hilo">Cargando título del hilo...</h2>
+
+    <section id="mensajes" class="mensajes-lista">
+      <div class="loading">Cargando mensajes...</div>
+    </section>
+
+    <section id="form-respuesta" class="form-respuesta">
+      <textarea id="mensaje-input" placeholder="Escribe tu mensaje..." rows="4"></textarea>
+      <button id="btn-enviar" onclick="enviarMensaje()">Enviar</button>
+    </section>
+
+    <button class="btn-mensaje" onclick="location.href='index.html'">🏠 Inicio</button>
+  </main>
+
+  <script type="module" src="js/mensajes.js"></script>
+</body>
+</html>

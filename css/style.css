@@ -1,0 +1,529 @@
+/* style.css */
+
+/* Variables CSS para los colores del tema */
+:root {
+  /* Modo Claro por defecto */
+  --color-bg-body: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+  --color-text-primary: #333;
+  --color-heading: #007BFF;
+  --color-button-bg: #007BFF;
+  --color-button-hover-bg: #0056b3;
+  --color-card-bg: #f8f9fa;
+  --color-card-border: #ddd;
+  --color-card-hover-bg: #e9ecef;
+  --color-link: #007BFF;
+  --color-link-hover: #0056b3;
+  --color-saludo-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --color-saludo-border: rgba(255,255,255,0.2);
+  --color-info-text: #666;
+  --color-error-text: red;
+  --color-success-text: green;
+  --color-loading-text: #666;
+  --color-no-hilos-text: #999;
+  --color-heading-shadow-light: #FF00FF; /* Magenta */
+  --color-heading-shadow-dark: #00FFFF; /* Cian */
+  --color-button-border: #004d99; /* Borde oscuro para el modo claro */
+  --color-animated-gradient-1-light: #f0f4f8;
+  --color-animated-gradient-2-light: #d9e2ec;
+  --color-animated-gradient-3-light: #c0d0e0; /* Un tercer color para el degradado */
+
+}
+
+/* Modo Oscuro - Se aplicará cuando el <body> tenga la clase 'dark-mode' */
+body.dark-mode {
+  --color-bg-body: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%); /* Degradado oscuro */
+  --color-text-primary: #ecf0f1; /* Texto claro */
+  --color-heading: #ecf0f1; /* Títulos blanco */
+  --color-button-bg: #8e44ad;
+  --color-button-hover-bg: #6c3483;
+  --color-card-bg: #34495e; /* Fondo de tarjetas más oscuro */
+  --color-card-border: #444;
+  --color-card-hover-bg: #40576f;
+  --color-link: #9b59b6;
+  --color-link-hover: #8e44ad;
+  --color-saludo-bg: linear-gradient(135deg, #4b0082 0%, #800080 100%); /* Degradado saludo más oscuro/profundo */
+  --color-saludo-border: rgba(255,255,255,0.1);
+  --color-info-text: #bdc3c7;
+  --color-error-text: #e74c3c;
+  --color-success-text: #2ecc71;
+  --color-loading-text: #bdc3c7;
+  --color-no-hilos-text: #7f8c8d;
+  --color-heading-shadow-light: #FF00FF; /* Mantiene el magenta */
+  --color-heading-shadow-dark: #00FFFF; /* Mantiene el cian */
+  --color-button-border: #5e3b7c; /* Borde más claro para el modo oscuro */
+  --color-animated-gradient-1-dark: #2c3e50;
+  --color-animated-gradient-2-dark: #1a252f;
+  --color-animated-gradient-3-dark: #3a4b5c; /* Un tercer color para el degradado oscuro */
+  background: linear-gradient(
+    135deg,
+    var(--color-animated-gradient-1-dark) 0%,
+    var(--color-animated-gradient-2-dark) 50%,
+    var(--color-animated-gradient-3-dark) 100%
+  );
+  background-size: 200% 200%; /* También en modo oscuro */
+  animation: background-move 15s ease infinite alternate; /* Misma animación */
+
+}
+
+/* Aplicar las variables a los elementos */
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 50px;
+  /* Elimina el background: var(--color-bg-body); actual y reemplázalo con el animado */
+  background: linear-gradient(
+    135deg,
+    var(--color-animated-gradient-1-light) 0%,
+    var(--color-animated-gradient-2-light) 50%,
+    var(--color-animated-gradient-3-light) 100%
+  );
+  background-size: 200% 200%; /* Duplica el tamaño para que se pueda animar */
+  min-height: 100vh;
+  margin: 0;
+  transition: color 0.5s ease; /* Solo transita el color de texto, el fondo será animado */
+  animation: background-move 15s ease infinite alternate; /* Animación de movimiento */
+}
+
+/* Definición de la animación para el fondo */
+@keyframes background-move {
+  0% {
+    background-position: 0% 50%; /* Punto de inicio del degradado */
+  }
+  100% {
+    background-position: 100% 50%; /* Punto final del degradado */
+  }
+}
+
+h1 {
+  color: var(--color-heading); /* Aplica a los títulos */
+  transition: color 0.5s ease;
+}
+
+button {
+  font-size: 18px;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+  background-color: var(--color-button-bg); /* Variable para el botón */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease; /* Transición para hover */
+}
+
+button:hover {
+  background-color: var(--color-button-hover-bg); /* Variable para el hover del botón */
+}
+
+/* Estilos para el saludo personalizado */
+#saludo-usuario {
+  background: var(--color-saludo-bg); /* Variable para el fondo del saludo */
+  color: white;
+  padding: 20px 30px;
+  border-radius: 15px;
+  margin: 25px auto;
+  font-size: 1.4em;
+  font-weight: bold;
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3); /* Este shadow podría ajustarse para dark mode si quieres */
+  max-width: 500px;
+  display: none;
+  animation: slideIn 0.6s ease-out;
+  border: 2px solid var(--color-saludo-border); /* Variable para el borde del saludo */
+  transition: background 0.5s ease, border-color 0.5s ease;
+}
+
+/* Estilos para la lista de hilos */
+.hilos-container {
+  max-width: 800px;
+  margin: 30px auto;
+  text-align: left;
+}
+
+.hilo-item {
+  background-color: var(--color-card-bg); /* Variable para el fondo de las tarjetas */
+  border: 1px solid var(--color-card-border); /* Variable para el borde de las tarjetas */
+  border-radius: 8px;
+  padding: 15px;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hilo-item:hover {
+  background-color: var(--color-card-hover-bg); /* Variable para el hover de las tarjetas */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Este shadow también podría ajustarse */
+}
+
+.hilo-titulo {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--color-link); /* Variable para el título del hilo */
+  margin-bottom: 5px;
+  transition: color 0.5s ease;
+}
+
+.hilo-info {
+  font-size: 14px;
+  color: var(--color-info-text); /* Variable para la info del hilo */
+  transition: color 0.5s ease;
+}
+
+a {
+  color: var(--color-link); /* Variable para enlaces */
+  text-decoration: none;
+  transition: color 0.5s ease;
+}
+
+a:hover {
+  color: var(--color-link-hover); /* Variable para hover de enlaces */
+}
+
+/* ... y el resto de tus estilos ... */
+.loading {
+  color: var(--color-loading-text);
+  font-style: italic;
+}
+
+.no-hilos {
+  color: var(--color-no-hilos-text);
+  text-align: center;
+  padding: 20px;
+}
+
+.error {
+  color: var(--color-error-text);
+  margin: 10px 0;
+}
+
+.success {
+  color: var(--color-success-text);
+  margin: 10px 0;
+}
+
+/* Animaciones existentes */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.9);
+  }
+}
+
+.theme-toggle-btn {
+  position: fixed; /* Lo fija respecto a la ventana del navegador */
+  top: 20px;       /* Margen desde la parte superior */
+  right: 20px;     /* Margen desde la parte derecha */
+  z-index: 1000;   /* Asegura que esté por encima de otros elementos */
+  /* Puedes añadir un poco de sombra o ajustar el padding si quieres */
+  padding: 8px 15px; /* Un poco menos de padding que los otros botones si quieres */
+  font-size: 16px;   /* Un poco más pequeño quizás */
+  border-radius: 50px; /* Bordes más redondeados para un look de "píldora" */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Sombra para que "flote" */
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.theme-toggle-btn:hover {
+  transform: translateY(-2px); /* Pequeño efecto al pasar el ratón */
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+h1 {
+  font-family: 'Press Start 2P', cursive; /* Fuente pixelada */
+  font-size: 3.5em; /* Un tamaño generoso */
+  color: var(--color-heading); /* Usa tu color de título del tema (azul/morado) */
+  text-shadow: 
+    4px 4px 0px rgba(0, 0, 0, 0.2), /* Sombra ligera para darle profundidad */
+    -2px -2px 0px var(--color-heading-shadow-light), /* Efecto 3D / glitch */
+    2px 2px 0px var(--color-heading-shadow-dark); /* Efecto 3D / glitch */
+  letter-spacing: 5px; /* Espaciado entre letras para un efecto más ancho */
+  margin-bottom: 40px; /* Margen para separarlo del contenido */
+  text-transform: uppercase; /* Todo en mayúsculas */
+  position: relative; /* Necesario para el efecto glitch */
+  display: inline-block; /* Para que el glitch no ocupe todo el ancho */
+  animation: glitch-text 2s infinite alternate ease-in-out; /* Animación de glitch */
+}
+
+/* Variables adicionales para el glitch */
+:root {
+    /* ... tus variables existentes ... */
+    --color-heading-shadow-light: #FF00FF; /* Magenta */
+    --color-heading-shadow-dark: #00FFFF; /* Cian */
+}
+
+body.dark-mode {
+    /* ... tus variables existentes de dark mode ... */
+    --color-heading-shadow-light: #FF00FF; /* Mantiene el magenta */
+    --color-heading-shadow-dark: #00FFFF; /* Mantiene el cian */
+}
+
+/* Animación del efecto glitch */
+@keyframes glitch-text {
+  0% {
+    text-shadow: 
+      -2px -2px 0 var(--color-heading-shadow-light), 
+      2px 2px 0 var(--color-heading-shadow-dark);
+    transform: translate(0px, 0px);
+  }
+  25% {
+    text-shadow: 
+      2px 2px 0 var(--color-heading-shadow-light), 
+      -2px -2px 0 var(--color-heading-shadow-dark);
+    transform: translate(1px, -1px);
+  }
+  50% {
+    text-shadow: 
+      -2px 2px 0 var(--color-heading-shadow-light), 
+      2px -2px 0 var(--color-heading-shadow-dark);
+    transform: translate(-1px, 1px);
+  }
+  75% {
+    text-shadow: 
+      2px -2px 0 var(--color-heading-shadow-light), 
+      -2px 2px 0 var(--color-heading-shadow-dark);
+    transform: translate(1px, 1px);
+  }
+  100% {
+    text-shadow: 
+      -2px -2px 0 var(--color-heading-shadow-light), 
+      2px 2px 0 var(--color-heading-shadow-dark);
+    transform: translate(0px, 0px);
+  }
+}
+
+/* Estilo para el título "Hilos del Foro" */
+.hilos-titulo-foro {
+  font-family: 'Press Start 2P', cursive; /* Misma fuente pixelada */
+  font-size: 2.2em; /* Un tamaño un poco más pequeño que el h1, pero aún llamativo */
+  color: var(--color-heading); /* Usa tu color de título del tema */
+  text-shadow:
+    3px 3px 0px rgba(0, 0, 0, 0.15), /* Sombra ligera */
+    -1px -1px 0px var(--color-heading-shadow-light), /* Efecto glitch más sutil */
+    1px 1px 0px var(--color-heading-shadow-dark);
+  letter-spacing: 3px; /* Menos espaciado que el h1 para su tamaño */
+  margin-top: 50px; /* Margen superior para separarlo */
+  margin-bottom: 20px; /* Margen inferior */
+  text-transform: uppercase; /* Todo en mayúsculas */
+  position: relative;
+  display: inline-block;
+  animation: glitch-text 2s infinite alternate ease-in-out;
+}
+
+/* Estilos GENERALES para todos los botones, incluyendo el de tema */
+button {
+  font-family: 'Press Start 2P', cursive; /* ¡La fuente pixelada! */
+  font-size: 0.9em; /* Un poco más pequeño que el título, pero legible */
+  padding: 12px 20px; /* Un padding decente */
+  margin: 10px;
+  cursor: pointer;
+  background-color: var(--color-button-bg);
+  color: white; /* Color del texto del botón */
+  border: 2px solid var(--color-button-border); /* Borde que puede cambiar */
+  border-radius: 8px; /* O quizás un poco menos redondeado si quieres un look más retro */
+  text-transform: uppercase; /* Mayúsculas para ese toque retro */
+  letter-spacing: 1px; /* Un poco de espaciado para la fuente */
+  text-shadow:
+    1px 1px 0px rgba(0, 0, 0, 0.2), /* Sombra ligera para el texto */
+    -0.5px -0.5px 0px var(--color-heading-shadow-light), /* Pequeño toque de glitch */
+    0.5px 0.5px 0px var(--color-heading-shadow-dark); /* Pequeño toque de glitch */
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.3); /* Sombra 3D para el botón */
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  background-color: var(--color-button-hover-bg);
+  transform: translateY(-2px) translateX(-2px); /* Se mueve un poco al pasar el ratón */
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.4); /* Sombra más pronunciada al pasar el ratón */
+}
+
+button:active {
+  transform: translateY(2px) translateX(2px); /* Se "presiona" al hacer clic */
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Estilos para el botón de cambio de tema (ajustados para el nuevo estilo base de botón) */
+.theme-toggle-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  padding: 10px 18px; /* Ajusta el padding para que no sea demasiado grande */
+  font-size: 0.8em; /* Un poco más pequeño que los otros botones */
+  border-radius: 8px; /* Bordes menos redondeados para el look retro */
+  box-shadow: 4px 4px 0px rgba(0,0,0,0.3); /* Mantiene la sombra 3D */
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.theme-toggle-btn:hover {
+  transform: translateY(-2px) translateX(-2px);
+  box-shadow: 6px 6px 0px rgba(0,0,0,0.4);
+}
+
+.theme-toggle-btn:active {
+  transform: translateY(2px) translateX(2px);
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+}
+
+.hilo-titulo {
+  font-family: 'Press Start 2P', cursive; /* Misma fuente pixelada */
+  font-size: 1.2em; /* Tamaño ajustado para títulos de hilo */
+  font-weight: normal; /* La fuente ya tiene un peso intrínseco, no necesita bold */
+  color: var(--color-link); /* Usa tu variable de color para enlaces/títulos de hilo */
+  margin-bottom: 5px;
+  text-transform: uppercase; /* Todo en mayúsculas */
+  letter-spacing: 1px; /* Espaciado entre letras para la fuente */
+  text-shadow:
+    1px 1px 0px rgba(0, 0, 0, 0.1), /* Sombra muy sutil */
+    -0.5px -0.5px 0px var(--color-heading-shadow-light), /* Pequeño toque de glitch */
+    0.5px 0.5px 0px var(--color-heading-shadow-dark); /* Pequeño toque de glitch */
+  position: relative; /* Necesario para la animación */
+  display: inline-block; /* Para que la animación afecte solo al texto */
+  transition: color 0.5s ease; /* Transición para cambios de color del tema */
+}
+
+body { 
+      font-family: Arial, sans-serif; 
+      text-align: center; 
+      padding: 50px; 
+    }
+    button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 8px;
+    }
+    button:hover { 
+      background-color: #0056b3; 
+    }
+    
+    /* Estilos para el saludo personalizado */
+    #saludo-usuario {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px 30px;
+      border-radius: 15px;
+      margin: 25px auto;
+      font-size: 1.4em;
+      font-weight: bold;
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+      max-width: 500px;
+      display: none;
+      animation: slideIn 0.6s ease-out;
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+    
+    @keyframes slideIn {
+      from { 
+        opacity: 0; 
+        transform: translateY(-30px) scale(0.9); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+      }
+    }
+    
+    @keyframes shine {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+    
+    /* Estilos para la lista de hilos */
+    .hilos-container {
+      max-width: 800px;
+      margin: 30px auto;
+      text-align: left;
+    }
+    
+    .hilo-item {
+      background-color: #f8f9fa;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 10px 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .hilo-item:hover {
+      background-color: #e9ecef;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    
+    .hilo-titulo {
+      font-size: 18px;
+      font-weight: bold;
+      color: #007BFF;
+      margin-bottom: 5px;
+    }
+    
+    .hilo-info {
+      font-size: 14px;
+      color: #666;
+    }
+    
+    .loading {
+      color: #666;
+      font-style: italic;
+    }
+    
+    .no-hilos {
+      color: #999;
+      text-align: center;
+      padding: 20px;
+    }
+/* Estilos para el saludo personalizado */
+#saludo-usuario {
+  background: var(--color-saludo-bg);
+  color: white;
+  padding: 8px 15px; /* Reducido de 15px 25px */
+  border-radius: 10px;
+  margin: 0;
+  font-size: 0.9em; /* Reducido de 1.1em para que el texto sea más pequeño */
+  font-family: 'Press Start 2P', cursive;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow:
+    1px 1px 0px rgba(0, 0, 0, 0.2),
+    -0.5px -0.5px 0px var(--color-heading-shadow-light),
+    0.5px 0.5px 0px var(--color-heading-shadow-dark);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+  border: 2px solid var(--color-saludo-border);
+  transition: background 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  /* Posicionamiento en la esquina superior izquierda */
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 999;
+  display: none; /* Asegura que no se muestre hasta que el JS lo active */
+}
+
+.btn-editar {
+  background: #0d6efd;
+  color: white;
+  border: none;
+  padding: 3px 6px;
+  margin-left: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+}

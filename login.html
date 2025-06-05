@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>ForoRamu - Login</title>
+  <style>
+    body { 
+      font-family: Arial, sans-serif; 
+      text-align: center; 
+      padding: 50px; 
+    }
+    button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 8px;
+    }
+    button:hover { 
+      background-color: #0056b3; 
+    }
+    
+    input {
+      font-size: 16px;
+      padding: 10px;
+      margin: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      width: 300px;
+    }
+    
+    form {
+      margin: 20px 0;
+    }
+    
+    .error {
+      color: red;
+      margin: 10px 0;
+    }
+    
+    .success {
+      color: green;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <button onclick="location.href='index.html'">🏠 Inicio</button>
+
+  <h1>Iniciar Sesión</h1>
+
+  <form id="loginForm">
+    <input type="email" name="email" placeholder="Email" required><br>
+    <input type="password" name="password" placeholder="Contraseña" required><br>
+    <button type="submit">Iniciar Sesión</button>
+  </form>
+
+  <div id="mensaje"></div>
+
+  <p>¿No tienes cuenta? <a href="crear-usuario.html">Crear cuenta</a></p>
+
+  <script>
+    const API_URL = 'https://foro-backend-g0z3.onrender.com';
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(e.target);
+      const datos = {
+        email: formData.get('email'),
+        password: formData.get('password')
+      };
+
+      try {
+        const response = await fetch('${API_URL}/usuarios/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(datos)
+        });
+
+        const resultado = await response.json();
+
+        if (response.ok) {
+          // Guardar token en localStorage
+          localStorage.setItem('token', resultado.token);
+          localStorage.setItem('usuario', JSON.stringify(resultado.usuario));
+          
+          document.getElementById('mensaje').innerHTML = 
+            '<div class="success">Login exitoso. Redirigiendo...</div>';
+          
+          // Redirigir al inicio después de 1 segundo
+          setTimeout(() => {
+            window.location.href = 'index.html';
+          }, 1000);
+        } else {
+          document.getElementById('mensaje').innerHTML = 
+            `<div class="error">${resultado.error}</div>`;
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('mensaje').innerHTML = 
+          '<div class="error">Error de conexión</div>';
+      }
+    });
+  </script>
+  <script src="./js/login.js"></script>
+</body>
+</html>

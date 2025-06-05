@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>ForoBeta</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <h1>ForoBeta</h1>
+
+  <div id="saludo-usuario" style="cursor: pointer;"></div>
+
+  <button id="theme-toggle" class="theme-toggle-btn">☀️ Modo Claro</button>
+
+  <div id="accionesNoLogueado">
+    <button onclick="location.href='crear-usuario.html'">Crear Usuario</button>
+    <button onclick="location.href='login.html'">Iniciar Sesión</button>
+  </div>
+
+  <div id="accionesLogueado" style="display:none;">
+    <button onclick="location.href='crear-hilo.html'">Crear Hilo</button>
+    <button onclick="cerrarSesion()">Cerrar Sesión</button>
+  </div>
+
+
+  <div class="hilos-container">
+    <h2 class="hilos-titulo-foro">Hilos del Foro</h2>
+    <div id="hilos-lista">
+      <div class="loading">Cargando hilos...</div>
+    </div>
+  </div>
+
+  <script type="module" src="./js/main.js"></script>
+
+</body>
+</html>

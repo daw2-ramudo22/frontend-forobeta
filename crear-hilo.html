@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Crear Hilo - ForoRamu</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 50px; text-align: center; }
+    input, textarea, button {
+      width: 80%;
+      padding: 10px;
+      margin: 10px;
+      font-size: 16px;
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover { background-color: #218838; }
+    #mensajeInfo { margin-top: 20px; font-weight: bold; }
+
+    .boton-crearhilo {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .boton-crearhilo:hover {
+      background-color: #0056b3;
+    }
+
+  </style>
+</head>
+<body>
+  <button class="boton-crearhilo" onclick="location.href='index.html'">🏠 Inicio</button>
+
+  <h1>Crear Nuevo Hilo</h1>
+  <form id="formHilo">
+    <input type="text" id="titulo" placeholder="Título del hilo" required /><br>
+    <textarea id="mensajeContenido" rows="5" placeholder="Mensaje del hilo" required></textarea><br>
+    <button type="submit">Publicar</button>
+  </form>
+  <p id="mensajeInfo"></p>
+
+  <script>
+  const API_URL = 'https://foro-backend-g0z3.onrender.com'; // ✅ tu backend en Render
+  const token = localStorage.getItem('token');
+  const mensajeInfo = document.getElementById('mensajeInfo');
+  const textareaMensaje = document.getElementById('mensajeContenido');
+
+  if (!token) {
+    mensajeInfo.innerText = 'Debes iniciar sesión para crear un hilo.';
+    document.getElementById('formHilo').style.display = 'none';
+  }
+
+  document.getElementById('formHilo').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const titulo = document.getElementById('titulo').value;
+    const mensaje = textareaMensaje.value;
+
+    try {
+      const res = await fetch(`${API_URL}/hilos`, { // ✅ usa la URL absoluta aquí
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          titulo: titulo,
+          mensaje_del_hilo: mensaje
+        })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        mensajeInfo.style.color = 'green';
+        mensajeInfo.innerText = '¡Hilo creado con éxito! Redirigiendo...';
+        document.getElementById('formHilo').reset();
+
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 1000);
+      } else {
+        mensajeInfo.style.color = 'red';
+        mensajeInfo.innerText = data.error || 'Error desconocido al crear hilo.';
+      }
+    } catch (error) {
+      mensajeInfo.style.color = 'red';
+      mensajeInfo.innerText = 'Error de conexión o del servidor: ' + error.message;
+      console.error('Error en la petición fetch:', error);
+    }
+  });
+</script>
+
+</body>
+</html>

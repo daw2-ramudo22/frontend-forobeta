@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>ForoBeta - Crear Usuario</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+    button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 8px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    input {
+      font-size: 16px;
+      padding: 10px;
+      margin: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      width: 300px;
+    }
+    input[type="file"] {
+      padding: 5px;
+    }
+    form {
+      margin: 20px 0;
+    }
+    .error {
+      color: red;
+      margin: 10px 0;
+    }
+    .success {
+      color: green;
+      margin: 10px 0;
+    }
+    .caps-lock-warning {
+      color: orange;
+      font-size: 0.9em;
+      margin-top: -5px;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <button onclick="location.href='index.html'">🏠 Inicio</button>
+
+  <h1>Crear Usuario</h1>
+
+  <form id="form-usuario">
+    <input type="text" name="nombre" placeholder="Nombre" required><br>
+    <input type="email" name="email" placeholder="Email" required><br>
+    <input type="date" id="cumple" name="cumple" required><br>
+    <input type="file" name="fotoperfil" accept="image/*"><br>
+    <input type="password" name="password" id="password" placeholder="Contraseña" required><br>
+    <div id="caps-lock-message" class="caps-lock-warning" style="display: none;">Bloq Mayús activado</div>
+    <button type="submit">Registrar</button>
+  </form>
+
+  <div id="mensaje"></div>
+
+  <p>¿Ya tienes cuenta? <a href="login.html">Iniciar sesión</a></p>
+
+  <script>
+    const API_URL = 'https://foro-backend-g0z3.onrender.com';
+
+    const passwordInput = document.getElementById('password');
+    const capsLockMessage = document.getElementById('caps-lock-message');
+
+    passwordInput.addEventListener('keydown', function(event) {
+      capsLockMessage.style.display = event.getModifierState('CapsLock') ? 'block' : 'none';
+    });
+
+    passwordInput.addEventListener('keyup', function(event) {
+      capsLockMessage.style.display = event.getModifierState('CapsLock') ? 'block' : 'none';
+    });
+
+    passwordInput.addEventListener('focus', function(event) {
+      if (event.getModifierState && event.getModifierState('CapsLock')) {
+        capsLockMessage.style.display = 'block';
+      }
+    });
+
+    passwordInput.addEventListener('blur', function() {
+      capsLockMessage.style.display = 'none';
+    });
+
+    document.getElementById('form-usuario').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const formData = new FormData(e.target);
+      const datos = {
+        nombre: formData.get('nombre'),
+        email: formData.get('email'),
+        cumple: formData.get('cumple'),
+        password: formData.get('password')
+        // fotoperfil aún no se procesa en esta versión
+      };
+
+      try {
+        const response = await fetch(`${API_URL}/usuarios/registro`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(datos)
+        });
+
+        const resultado = await response.json();
+
+        if (response.ok) {
+          localStorage.setItem('userId', resultado.usuario.id);
+          document.getElementById('mensaje').innerHTML =
+            '<div class="success">Usuario creado correctamente. Redirigiendo...</div>';
+          setTimeout(() => {
+            window.location.href = 'login.html';
+          }, 1500);
+        } else {
+          document.getElementById('mensaje').innerHTML =
+            `<div class="error">${resultado.error}</div>`;
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('mensaje').innerHTML =
+          '<div class="error">Error de conexión</div>';
+      }
+    });
+  </script>
+</body>
+</html>

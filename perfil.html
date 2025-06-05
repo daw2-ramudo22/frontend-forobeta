@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>ForoBeta</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 40px; text-align: center; }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 15px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .editar { background-color: #007bff; color: white; }
+    .editar:hover { background-color: #0056b3; }
+    .eliminar { background-color: #dc3545; color: white; }
+    .eliminar:hover { background-color: #a71d2a; }
+    .btn-perfil {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 8px;
+    }
+
+    .btn-perfil:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <button class="btn-perfil" onclick="location.href='index.html'">🏠 Inicio</button>
+
+  <h1>Mi Perfil</h1>
+  <div id="perfil-info">
+    <p><strong>Nombre:</strong> <span id="perfil-nombre"></span></p>
+    <p><strong>Email:</strong> <span id="perfil-email"></span></p>
+    <p><strong>Fecha de registro:</strong> <span id="perfil-fecha"></span></p>
+    <p><strong>Fecha de nacimiento:</strong> <span id="perfil-cumple"></span></p>
+  </div>
+
+  <button class="editar" onclick="editarNombre()">✏️ Editar Nombre</button>
+  <button class="eliminar" onclick="eliminarCuenta()">🗑️ Eliminar Cuenta</button>
+
+<script src="./js/perfil.js"></script>
+</body>
+</html>

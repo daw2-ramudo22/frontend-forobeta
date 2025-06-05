@@ -255,7 +255,6 @@ h1 {
   text-transform: uppercase; /* Todo en mayúsculas */
   position: relative; /* Necesario para el efecto glitch */
   display: inline-block; /* Para que el glitch no ocupe todo el ancho */
-  animation: glitch-text 2s infinite alternate ease-in-out; /* Animación de glitch */
 }
 
 /* Variables adicionales para el glitch */
@@ -320,6 +319,7 @@ body.dark-mode {
   text-transform: uppercase; /* Todo en mayúsculas */
   position: relative;
   display: inline-block;
+  animation: glitch-text 2s infinite alternate ease-in-out;
 }
 
 /* Estilos GENERALES para todos los botones, incluyendo el de tema */

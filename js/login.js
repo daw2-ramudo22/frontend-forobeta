@@ -4,8 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('login-form');
   const emailInput = document.getElementById('email');
   const passwordInput = document.getElementById('password');
+  const mensajeDiv = document.getElementById('mensaje');
 
-  if (!form || !emailInput || !passwordInput) {
+  if (!form || !emailInput || !passwordInput || !mensajeDiv) {
     console.error("Elementos del formulario no encontrados");
     return;
   }
@@ -25,21 +26,24 @@ document.addEventListener('DOMContentLoaded', () => {
         body: JSON.stringify({ email, password })
       });
 
-      const data = await res.json();
+      const resultado = await res.json();
 
-      if (!res.ok) {
-        alert(data.error || 'Error al iniciar sesión');
-        return;
+      if (res.ok) {
+        localStorage.setItem('token', resultado.token);
+        localStorage.setItem('usuario', JSON.stringify(resultado.usuario));
+
+        mensajeDiv.innerHTML = '<div class="success">Inicio de sesión exitoso. Redirigiendo...</div>';
+
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 1500);
+      } else {
+        mensajeDiv.innerHTML = `<div class="error">${resultado.error}</div>`;
       }
 
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('usuario', JSON.stringify(data.usuario));
-
-      alert("Login exitoso");
-      window.location.href = 'index.html';
-    } catch (err) {
-      console.error('Error en login:', err);
-      alert("Error en el servidor");
+    } catch (error) {
+      console.error('Error:', error);
+      mensajeDiv.innerHTML = '<div class="error">Error de conexión</div>';
     }
   });
 });

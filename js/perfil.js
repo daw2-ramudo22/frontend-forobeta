@@ -107,33 +107,8 @@ async function cargarPerfil() {
   }
 }
 
-function editarCumple() {
-  const nuevoCumple = prompt("Introduce tu fecha de cumpleaños (YYYY-MM-DD):");
-  if (!nuevoCumple) return;
-
-  const token = localStorage.getItem('token');
-
-  fetch(`${API_URL}/usuarios/editar-cumple`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    },
-    body: JSON.stringify({ cumple: nuevoCumple })
-  })
-    .then(res => res.json())
-    .then(data => {
-      alert("Cumpleaños actualizado");
-      location.reload();
-    })
-    .catch(err => {
-      console.error("Error al editar cumpleaños:", err);
-    });
-}
-
 // Hacer funciones accesibles globalmente si se usan en HTML
 window.editarNombre = editarNombre;
 window.eliminarCuenta = eliminarCuenta;
-window.editarCumple = editarCumple;
 
 document.addEventListener('DOMContentLoaded', cargarPerfil);

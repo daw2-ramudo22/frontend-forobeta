@@ -8,23 +8,30 @@
 </head>
 <body>
 
-  <!-- Saludo de usuario -->
+  <!-- Botón de modo oscuro -->
+  <button class="theme-toggle-btn" onclick="toggleTheme()">🌓 Tema</button>
+
+  <!-- Saludo del usuario -->
   <div id="saludo-usuario"></div>
 
   <!-- Contenedor principal -->
   <main class="hilos-container">
-    <h2 class="hilos-titulo-foro" id="titulo-hilo">Cargando título del hilo...</h2>
+    <h1 class="hilos-titulo-foro" id="titulo-hilo">Cargando título del hilo...</h1>
 
+    <!-- Lista de mensajes -->
     <section id="mensajes" class="mensajes-lista">
       <div class="loading">Cargando mensajes...</div>
     </section>
 
+    <!-- Formulario de nuevo mensaje -->
     <section id="form-respuesta" class="form-respuesta">
-      <textarea id="mensaje-input" placeholder="Escribe tu mensaje..." rows="4"></textarea>
-      <button id="btn-enviar" class="btn-editar" onclick="enviarMensaje()">Enviar</button>
+      <textarea id="mensaje-input" placeholder="Escribe tu mensaje aquí..." rows="4" class="mensaje-textarea"></textarea>
+      <br>
+      <button class="btn-editar" onclick="enviarMensaje()">📨 Enviar</button>
     </section>
 
-    <button class="btn-mensaje" onclick="location.href='index.html'">🏠 Inicio</button>
+    <br>
+    <button class="btn-mensaje" onclick="location.href='index.html'">🏠 Volver al Inicio</button>
   </main>
 
   <script type="module" src="js/mensajes.js"></script>

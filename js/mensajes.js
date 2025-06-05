@@ -1,4 +1,4 @@
-const API_URL = 'https://foro-backend-g0z3.onrender.com';
+const API_URL = 'https://backend-forobeta.onrender.com';
 
 // Función global para enviar un mensaje (llamada desde el HTML onclick)
 window.enviarMensaje = async function () {

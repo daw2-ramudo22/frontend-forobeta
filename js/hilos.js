@@ -1,6 +1,6 @@
 // En este archivo js controlamos los hilos del foro, mostrando un listado de todos ellos
 import { formatearFecha } from './utils.js';
-const API_URL = 'https://foro-backend-g0z3.onrender.com';
+const API_URL = 'https://backend-forobeta.onrender.com';
 
 export async function cargarHilos() {
   try {

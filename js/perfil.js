@@ -1,4 +1,4 @@
-const API_URL = 'https://foro-backend-g0z3.onrender.com';
+const API_URL = 'https://backend-forobeta.onrender.com';
 
 // Editar nombre
 function editarNombre() {

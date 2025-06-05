@@ -87,14 +87,17 @@ async function cargarPerfil() {
 
     document.getElementById('perfil-fecha').textContent = registroFormateado;
 
-    const fechaCumple = new Date(usuario.cumple);
-    const cumpleFormateado = isNaN(fechaCumple)
-      ? 'No establecido'
-      : fechaCumple.toLocaleDateString('es-ES', {
+    let cumpleFormateado = 'No establecido';
+    if (usuario.cumple) {
+      const fechaCumple = new Date(usuario.cumple);
+      if (!isNaN(fechaCumple.getTime())) {
+        cumpleFormateado = fechaCumple.toLocaleDateString('es-ES', {
           day: 'numeric',
           month: 'long',
           year: 'numeric'
         });
+      }
+    }
 
     document.getElementById('perfil-cumple').textContent = cumpleFormateado;
 
@@ -104,8 +107,33 @@ async function cargarPerfil() {
   }
 }
 
+function editarCumple() {
+  const nuevoCumple = prompt("Introduce tu fecha de cumpleaños (YYYY-MM-DD):");
+  if (!nuevoCumple) return;
+
+  const token = localStorage.getItem('token');
+
+  fetch(`${API_URL}/usuarios/editar-cumple`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify({ cumple: nuevoCumple })
+  })
+    .then(res => res.json())
+    .then(data => {
+      alert("Cumpleaños actualizado");
+      location.reload();
+    })
+    .catch(err => {
+      console.error("Error al editar cumpleaños:", err);
+    });
+}
+
 // Hacer funciones accesibles globalmente si se usan en HTML
 window.editarNombre = editarNombre;
 window.eliminarCuenta = eliminarCuenta;
+window.editarCumple = editarCumple;
 
 document.addEventListener('DOMContentLoaded', cargarPerfil);

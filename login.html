@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <title>ForoRamu - Login</title>
   <style>
-    body { 
-      font-family: Arial, sans-serif; 
-      text-align: center; 
-      padding: 50px; 
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
     }
     button {
       font-size: 18px;
@@ -19,10 +19,9 @@
       border: none;
       border-radius: 8px;
     }
-    button:hover { 
-      background-color: #0056b3; 
+    button:hover {
+      background-color: #0056b3;
     }
-    
     input {
       font-size: 16px;
       padding: 10px;
@@ -31,16 +30,13 @@
       border-radius: 8px;
       width: 300px;
     }
-    
     form {
       margin: 20px 0;
     }
-    
     .error {
       color: red;
       margin: 10px 0;
     }
-    
     .success {
       color: green;
       margin: 10px 0;
@@ -62,51 +58,6 @@
 
   <p>¿No tienes cuenta? <a href="crear-usuario.html">Crear cuenta</a></p>
 
-  <script>
-    const API_URL = 'https://backend-forobeta.onrender.com';
-    document.getElementById('loginForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      
-      const formData = new FormData(e.target);
-      const datos = {
-        email: formData.get('email'),
-        password: formData.get('password')
-      };
-
-      try {
-        const response = await fetch('${API_URL}/usuarios/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(datos)
-        });
-
-        const resultado = await response.json();
-
-        if (response.ok) {
-          // Guardar token en localStorage
-          localStorage.setItem('token', resultado.token);
-          localStorage.setItem('usuario', JSON.stringify(resultado.usuario));
-          
-          document.getElementById('mensaje').innerHTML = 
-            '<div class="success">Login exitoso. Redirigiendo...</div>';
-          
-          // Redirigir al inicio después de 1 segundo
-          setTimeout(() => {
-            window.location.href = 'index.html';
-          }, 1000);
-        } else {
-          document.getElementById('mensaje').innerHTML = 
-            `<div class="error">${resultado.error}</div>`;
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        document.getElementById('mensaje').innerHTML = 
-          '<div class="error">Error de conexión</div>';
-      }
-    });
-  </script>
   <script type="module" src="./js/login.js"></script>
 </body>
 </html>

@@ -38,21 +38,38 @@ window.enviarMensaje = async function () {
 // Función para cargar los mensajes de un hilo
 async function cargarMensajes(hiloId) {
   try {
-    const res = await fetch(`${API_URL}/mensajes/hilo/${hiloId}`);
-    const mensajes = await res.json();
     const contenedor = document.getElementById('mensajes');
     contenedor.innerHTML = '';
+
+    // Obtener los datos del hilo (incluye título y mensaje inicial)
+    const hiloRes = await fetch(`${API_URL}/hilos/${hiloId}`);
+    const hilo = await hiloRes.json();
+
+    // Mostrar el mensaje inicial del hilo
+    const mensajeInicial = document.createElement('div');
+    mensajeInicial.classList.add('mensaje');
+    mensajeInicial.innerHTML = `
+      <p><strong>${hilo.owner?.nombre || 'Anónimo'}:</strong> ${hilo.mensaje_del_hilo}</p>
+      <small>Publicado el: ${new Date(hilo.fecha_publicacion).toLocaleString('es-ES')}</small>
+    `;
+    contenedor.appendChild(mensajeInicial);
+
+    // Ahora carga los demás mensajes del hilo
+    const res = await fetch(`${API_URL}/mensajes/hilo/${hiloId}`);
+    const mensajes = await res.json();
 
     const usuario = JSON.parse(localStorage.getItem('usuario'));
 
     if (mensajes.length === 0) {
-      contenedor.innerHTML = '<div class="no-hilos">Este hilo no tiene mensajes aún.</div>';
+      const sinRespuestas = document.createElement('div');
+      sinRespuestas.className = 'no-hilos';
+      sinRespuestas.textContent = 'Este hilo no tiene respuestas aún.';
+      contenedor.appendChild(sinRespuestas);
       return;
     }
 
     mensajes.forEach(mensaje => {
       const esPropio = mensaje.autor?._id === usuario?.id;
-
       const div = document.createElement('div');
       div.classList.add('mensaje');
       div.innerHTML = `
@@ -67,8 +84,10 @@ async function cargarMensajes(hiloId) {
     });
   } catch (error) {
     console.error("Error al cargar mensajes:", error);
+    document.getElementById('mensajes').innerHTML = '<div class="error">No se pudieron cargar los mensajes.</div>';
   }
 }
+
 
 // Función para editar mensaje
 window.editarMensaje = async function (id, textoActual) {

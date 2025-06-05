@@ -1,4 +1,5 @@
-const API_URL = 'https://backend-forobeta.onrender.com';
+// login.js
+import { API_URL } from './config.js';
 
 document.getElementById('login-form').addEventListener('submit', async function (e) {
   e.preventDefault();

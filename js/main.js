@@ -5,8 +5,6 @@ import { cargarHilos } from './hilos.js';
 
 // Esto es lo que estaba en el document.addEventListener('DOMContentLoaded')
 document.addEventListener('DOMContentLoaded', function() {
-  // Cargar preferencia de tema antes de todo lo demás
-  cargarPreferenciaTema();
   setupThemeToggle(); // Configura el listener del botón de tema
 
   // Verificar sesión y mostrar saludo

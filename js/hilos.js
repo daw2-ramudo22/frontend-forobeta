@@ -1,4 +1,4 @@
-// En este archivo js controlamos los hilos del foro, mostrando un listado de todos ellos
+//En este archivo js controlamos los hilos del foro, mostrando un listado de todos ellos
 import { formatearFecha } from './utils.js';
 const API_URL = 'https://backend-forobeta.onrender.com';
 
@@ -68,7 +68,7 @@ window.abrirHilo = (hiloId) => {
   window.location.href = `hilo.html?id=${hiloId}`;
 };
 
-// ✅ Función para borrar un hilo
+//Función para borrar un hilo
 window.borrarHilo = async (event, hiloId) => {
   event.stopPropagation();
 
@@ -96,7 +96,7 @@ window.borrarHilo = async (event, hiloId) => {
   }
 };
 
-// ✅ Función para editar un hilo
+//Función para editar un hilo
 window.editarHilo = (event, hiloId, tituloActual, mensajeActual) => {
   event.stopPropagation();
 

@@ -3,14 +3,14 @@ import { auth } from './auth.js';
 import { cargarHilos } from './hilos.js';
 
 
-// Esto es lo que estaba en el document.addEventListener('DOMContentLoaded')
+//Esto es lo que estaba en el document.addEventListener('DOMContentLoaded')
 document.addEventListener('DOMContentLoaded', function() {
-  // Verificar sesión y mostrar saludo
+  //Verificar sesión y mostrar saludo
   auth.verificarSesion();
 
-  // Cargar hilos
+  //Cargar hilos
   cargarHilos();
 });
 
-// Opcional: Recargar hilos cada 30 segundos
+//Opcional: Recargar hilos cada 30 segundos
 setInterval(cargarHilos, 30000);

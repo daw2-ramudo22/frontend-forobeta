@@ -1,4 +1,4 @@
-// js/theme.js
+//js/theme.js
 (function () {
   const themeToggleBtn = document.getElementById('theme-toggle');
   const body = document.body;
@@ -34,10 +34,10 @@
     });
   }
 
-  // Ejecutar al cargar
+  //Ejecutar al cargar
   cargarPreferenciaTema();
   setupThemeToggle();
 
-  // Opcionalmente exportar al scope global si lo necesitas en onclick=""
+  //Opcionalmente exportar al scope global si lo necesitas en onclick=""
   window.aplicarTema = aplicarTema;
 })();

@@ -1,3 +1,4 @@
+//Login del usuario. Envia credenciales al backend y guarda el token en localStorage
 import { API_URL } from './config.js';
 
 document.addEventListener('DOMContentLoaded', () => {

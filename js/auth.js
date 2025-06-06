@@ -76,8 +76,8 @@ class AuthManager {
   }
 }
 
-// Exporta la instancia para que otros scripts puedan usarla
+//Exporta la instancia para que otros scripts puedan usarla
 export const auth = new AuthManager();
 
-// Hace la función cerrarSesion global para el onclick en el HTML
+//Hace la función cerrarSesion global para el onclick en el HTML
 window.cerrarSesion = () => auth.cerrarSesion();

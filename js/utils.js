@@ -1,4 +1,4 @@
-// Este js sirve para formatear fechas en un formato legible para el usuario.
+//Este js sirve para formatear fechas en un formato legible para el usuario.
 export function formatearFecha(fecha) {
   const date = new Date(fecha);
   return date.toLocaleDateString('es-ES', {

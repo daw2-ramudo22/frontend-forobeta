@@ -1,6 +1,7 @@
+//Archivo para controlar los mensajes de un hilo en el foro
 const API_URL = 'https://backend-forobeta.onrender.com';
 
-// Función global para enviar un mensaje
+//Función global para enviar un mensaje
 window.enviarMensaje = async function () {
   const token = localStorage.getItem('token');
   const texto = document.getElementById('mensaje-input').value;
@@ -35,7 +36,7 @@ window.enviarMensaje = async function () {
   }
 };
 
-// Función para cargar los mensajes de un hilo
+//Función para cargar los mensajes de un hilo
 async function cargarMensajes(hiloId) {
   try {
     const res = await fetch(`${API_URL}/mensajes/hilo/${hiloId}`);
@@ -70,7 +71,7 @@ async function cargarMensajes(hiloId) {
   }
 }
 
-// Función para editar mensaje
+//Función para editar mensaje
 window.editarMensaje = async function (id, textoActual) {
   const nuevoTexto = prompt("Editar tu mensaje:", textoActual);
   if (!nuevoTexto || nuevoTexto.trim() === '') return;
@@ -97,7 +98,7 @@ window.editarMensaje = async function (id, textoActual) {
   }
 };
 
-// Función para eliminar mensaje
+//Función para eliminar mensaje
 window.eliminarMensaje = async function (id) {
   if (!confirm("¿Seguro que quieres eliminar este mensaje?")) return;
 
@@ -121,7 +122,7 @@ window.eliminarMensaje = async function (id) {
   }
 };
 
-// Cargar mensajes al iniciar
+//Cargar mensajes al iniciar
 document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
   const hiloId = params.get('id');
@@ -146,8 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
   const hiloId = params.get('id');
 
-  cargarTituloHilo(hiloId);   // 👈 carga el título
-  cargarMensajes(hiloId);     // 👈 carga los mensajes
+  cargarTituloHilo(hiloId);
+  cargarMensajes(hiloId);
 });
 
 

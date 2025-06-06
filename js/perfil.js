@@ -1,6 +1,7 @@
+//Archivo para controlar el perfil del usuario en el foro
 const API_URL = 'https://backend-forobeta.onrender.com';
 
-// Editar nombre
+//Editar nombre
 function editarNombre() {
   const nuevoNombre = prompt("Introduce tu nuevo nombre:");
   if (!nuevoNombre) return;
@@ -25,7 +26,7 @@ function editarNombre() {
     });
 }
 
-// Eliminar cuenta
+//Eliminar cuenta
 function eliminarCuenta() {
   const confirmar = confirm("¿Estás seguro de que deseas eliminar tu cuenta?");
   if (!confirmar) return;
@@ -52,7 +53,7 @@ function eliminarCuenta() {
     });
 }
 
-// Cargar perfil
+//Cargar perfil
 async function cargarPerfil() {
   const token = localStorage.getItem('token');
   if (!token) {
@@ -107,7 +108,7 @@ async function cargarPerfil() {
   }
 }
 
-// Hacer funciones accesibles globalmente si se usan en HTML
+//Hacer funciones accesibles globalmente si se usan en HTML
 window.editarNombre = editarNombre;
 window.eliminarCuenta = eliminarCuenta;
 
